@@ -100,6 +100,8 @@ color: #fff;border-radius: 5px;border: 1px solid #6d6d6d;font-size: 12px;left: 3
 background: -moz-linear-gradient(top, #d58e94 0%, #d42e32 50%, #be1012 51%, #90191b 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d58e94), color-stop(50%,#d42e32), color-stop(51%,#be1012), color-stop(100%,#90191b)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top, #d58e94 0%,#d42e32 50%,#be1012 51%,#90191b 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top, #d58e94 0%,#d42e32 50%,#be1012 51%,#90191b 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top, #d58e94 0%,#d42e32 50%,#be1012 51%,#90191b 100%); /* IE10+ */background: linear-gradient(top, #d58e94 0%,#d42e32 50%,#be1012 51%,#90191b 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d58e94', endColorstr='#90191b',GradientType=0 ); /* IE6-9 */
 border-color:#9A8185;}
 
+	#showsidebar {display:block;}
+
 
 	#sidebar {background:#BCBEC4;border-right:1px solid #000;height:100%;left:0;position:fixed;top:0;vertical-align:top;width:300px;z-index:1;}
 		#sidebar .header {width:300px;}
@@ -122,6 +124,7 @@ border-color:#9A8185;}
 /* iPhone */
 @media only screen and (max-width: 768px) {
 	#sidebar {display:none;}
+	#showsidebar {display:block;}
 	#main {padding-left:20px;}
 		#main .header {padding-left:0;}
 			#main .header .left {left:10px;}
@@ -133,6 +136,72 @@ border-color:#9A8185;}
 }
 
 </style>
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script>
+
+$(document).ready(function() {
+
+	var small_view = ($('body').width() < 768 )?1:0;
+            
+    $('#showsidebar').click(function(){
+
+      if ($('#sidebar').css('display') == 'none') {
+        if (small_view){
+          $('#sidebar').css('left',-$('#sidebar').outerWidth());
+          $('#sidebar').show().animate({left: 0},'fast');
+          $('#main').css('position','relative');
+          $('#main').animate({'left':'320px'},'fast');
+          $('#main .header').animate({'padding-left':'155px'},'fast');
+          $('#main .header .left').animate({'left':'320px'},'fast');
+          $('#main .content p label').animate({'width':'100%'},'fast');
+          $('#main .content p input[type=text]').animate({'width':'100%'},'fast');
+          $('#main .content p input[type=password]').animate({'width':'100%'},'fast');
+          $('#main .content p select').animate({'width':'100%'},'fast');
+          $('#lang').hide();
+        } else {
+          $('#sidebar').css('left',-$('#sidebar').outerWidth());
+          $('#sidebar').show().animate({left: 0},'fast');
+          $('#main').animate({'padding-left':'320px'},'fast');
+          $('#main .header').animate({'padding-left':'155px'},'fast');
+          $('#main .header .left').animate({'left':'320px'},'fast');
+          $('#main .content p label').animate({'width':'100%'},'fast');
+          $('#main .content p input[type=text]').animate({'width':'100%'},'fast');
+          $('#main .content p input[type=password]').animate({'width':'100%'},'fast');
+          $('#main .content p select').animate({'width':'100%'},'fast'); 
+        }
+      } else {
+        if (small_view){
+          $('#sidebar').animate({left: -$('#sidebar').outerWidth()},'fast',function(){$('#sidebar').hide()});
+          $('#main').css('position','relative');
+          $('#main').animate({'left':'0px'},'fast');
+          $('#main .header').animate({'padding-left':'0px'},'fast');
+          $('#main .header .left').animate({'left':'20px'},'fast');
+          $('#main .content p label').animate({'width':'100%'},'fast');
+          $('#main .content p input[type=text]').animate({'width':'100%'},'fast');
+          $('#main .content p input[type=password]').animate({'width':'100%'},'fast');
+          $('#main .content p select').animate({'width':'100%'},'fast');
+          $('#lang').show();
+        } else {
+          $('#sidebar').animate({left: -$('#sidebar').outerWidth()},'fast',function(){$('#sidebar').hide()});
+          $('#main').animate({'padding-left':'20px'},'fast');
+          $('#main .header').animate({'padding-left':'0px'},'fast');
+          $('#main .header .left').animate({'left':'20px'},'fast');
+          $('#main .content p label').animate({'width':'60%'},'fast');
+          $('#main .content p input[type=text]').animate({'width':'60%'},'fast');
+          $('#main .content p input[type=password]').animate({'width':'60%'},'fast');
+          $('#main .content p select').animate({'width':'60%'},'fast');
+        }
+      }
+    return false;
+    }); 
+});
+
+</script>
+
+
 </head>
 
 <body>
@@ -144,7 +213,7 @@ border-color:#9A8185;}
 		
 			<div class="header">
 				
-				<a class="left" href="?">Back</a>
+				<a class="left" id="showsidebar" href="?">Menu</a>
 				<h1 class="title">Section title</h1>
 				<a class="right" href="?">Edit</a>
 				
@@ -210,9 +279,9 @@ border-color:#9A8185;}
 	
 		<div id="sidebar">
 			
-			<div class="header">
+			<!--div class="header">
 				<p class="title">iOS web app template</p>
-			</div><!--header-->
+			</div--><!--header-->
 			
 			<div class="content">
 				
@@ -223,7 +292,7 @@ border-color:#9A8185;}
 					<li><a href="?"><span class="ico msg"></span>Status indicator <span>On</span></a></li>
 				</ul>
 				
-				<p>iPad/iPhone template by <a class="strong" href="http://xaviesteve.com/">Xavi Esteve</a> made in pure HTML and CSS (without requiring JavaScript) that works perfectly on any modern browser. It uses responsive queries to hide the sidebar in iPad portrait mode and in the iPhone (you can disable that easily if you want to).</p>
+				<p>iPad/iPhone template by <a class="strong" href="http://xaviesteve.com/">Xavi Esteve</a> and modified by <a class="strong" href="#">Guillermofr</a> made in pure HTML and CSS (without requiring JavaScript) that works perfectly on any modern browser. It uses responsive queries to hide the sidebar in iPad portrait mode and in the iPhone (you can disable that easily if you want to).</p>
 				<p>The code has been developed so that there is no "divitis", completely optimized and minimal HTML code. There are no images or animations at all, everything has been coded using the latest CSS3 available features. Ready to download and start developing. These are some of the template's features:</p>
 				<p><strong>App-ready:</strong> You can install this template as a normal app, removing the Safari top navigation bar and enjoying the full screen.</p>
 				<p><strong>Responsive:</strong> Hides the sidebar in iPhone, mobiles and iPad portrait mode.</p>
