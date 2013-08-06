@@ -37,7 +37,7 @@ border-bottom:1px solid #000;height:43px;position:fixed;text-align:center;top:0;
 .header .title {color:#71787F;font-size:18px;font-weight:bold;margin-top:10px;text-shadow:0 1px 1px #fff;}
 
 /* Structure */
-html, #wrap {background:#d8dae0;font: 16px normal Helvetica,sans-serif;-webkit-user-select: none;}
+html, #wrap {background:#d8dae0;font: 16px normal Helvetica,sans-serif;-webkit-user-select: none;overflow-x: hidden;}
 			
 	#main {background:#d8dae0;height:100%;padding:63px 20px 20px 320px;position:relative;vertical-align:top;}
 		#main .header {padding-left:155px;width:100%;}
@@ -156,21 +156,15 @@ $(document).ready(function() {
           $('#main').animate({'left':'320px'},'fast');
           $('#main .header').animate({'padding-left':'155px'},'fast');
           $('#main .header .left').animate({'left':'320px'},'fast');
-          $('#main .content p label').animate({'width':'100%'},'fast');
-          $('#main .content p input[type=text]').animate({'width':'100%'},'fast');
-          $('#main .content p input[type=password]').animate({'width':'100%'},'fast');
-          $('#main .content p select').animate({'width':'100%'},'fast');
-          $('#lang').hide();
+          $('.header .right').hide();
+          
         } else {
           $('#sidebar').css('left',-$('#sidebar').outerWidth());
           $('#sidebar').show().animate({left: 0},'fast');
           $('#main').animate({'padding-left':'320px'},'fast');
           $('#main .header').animate({'padding-left':'155px'},'fast');
           $('#main .header .left').animate({'left':'320px'},'fast');
-          $('#main .content p label').animate({'width':'100%'},'fast');
-          $('#main .content p input[type=text]').animate({'width':'100%'},'fast');
-          $('#main .content p input[type=password]').animate({'width':'100%'},'fast');
-          $('#main .content p select').animate({'width':'100%'},'fast'); 
+
         }
       } else {
         if (small_view){
@@ -179,20 +173,12 @@ $(document).ready(function() {
           $('#main').animate({'left':'0px'},'fast');
           $('#main .header').animate({'padding-left':'0px'},'fast');
           $('#main .header .left').animate({'left':'20px'},'fast');
-          $('#main .content p label').animate({'width':'100%'},'fast');
-          $('#main .content p input[type=text]').animate({'width':'100%'},'fast');
-          $('#main .content p input[type=password]').animate({'width':'100%'},'fast');
-          $('#main .content p select').animate({'width':'100%'},'fast');
-          $('#lang').show();
+          $('.header .right').show();
         } else {
           $('#sidebar').animate({left: -$('#sidebar').outerWidth()},'fast',function(){$('#sidebar').hide()});
           $('#main').animate({'padding-left':'20px'},'fast');
           $('#main .header').animate({'padding-left':'0px'},'fast');
           $('#main .header .left').animate({'left':'20px'},'fast');
-          $('#main .content p label').animate({'width':'60%'},'fast');
-          $('#main .content p input[type=text]').animate({'width':'60%'},'fast');
-          $('#main .content p input[type=password]').animate({'width':'60%'},'fast');
-          $('#main .content p select').animate({'width':'60%'},'fast');
         }
       }
     return false;
